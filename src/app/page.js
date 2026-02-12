@@ -13,9 +13,9 @@ function LoggedIn({ profile, setProfile }) {
         Hello {profile.firstname}
       </p>
       <div className="flex flex-col items-center justify-center h-full p-10 gap-6">
-        {/* {profile.posts.map((p, idx) => (
+        {profile.posts.map((p, idx) => (
           <Post {...p} key={idx + Math.random()} />
-        ))} */}
+        ))}
       </div>
     </div>
   );
