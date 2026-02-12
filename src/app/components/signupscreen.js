@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, use } from "react";
+import { useState, useEffect, useRef, use } from "react";
 import Message from "@/app/components/uiMessage";
 
 export default function SignupScreen() {
@@ -7,7 +7,10 @@ export default function SignupScreen() {
   const [emptyFields, setEmptyFields] = useState(false);
   const [userExist, setUserExist] = useState(null);
   const [submitButton, setSubmitButton] = useState(false);
-  const [userInput, setUserInput] = useState({
+
+  // change to useRef
+
+  const userInput = useRef({
     firstname: "",
     lastname: "",
     age: "",
@@ -17,41 +20,50 @@ export default function SignupScreen() {
     posts: [],
   });
 
-  function checkUsername() {
-    console.log("Checking Name");
+  const usersList = useRef([]);
+
+  useEffect(() => {
     async function loadUserList() {
       try {
         const response = await fetch("/api/load?name=userList");
         const userList = await response.json();
 
         for (const user of userList.username) {
-          if (userInput.username === user) {
-            setUserExist(true);
-            return;
-          }
+          usersList.current.push(user);
         }
 
         setUserExist(false);
         setSubmitButton(true);
-
-        console.log(submitButton);
       } catch (error) {
         alert("Error loading file: " + error.message);
       }
     }
 
     loadUserList();
+  }, []);
+
+  let users = new Set(usersList.current);
+
+  function handleChange(value) {
+    if (users.has(value)) {
+      setUserExist(true);
+      return;
+    } else {
+      setUserExist(false);
+    }
   }
 
   function handleSignUp() {
+    console.log(users);
+
     if (
       !(
-        userInput.firstname &&
-        userInput.lastname &&
-        userInput.age &&
-        userInput.username &&
-        userInput.password &&
-        userInput.confirm
+        userInput.current.firstname &&
+        userInput.current.lastname &&
+        userInput.current.age &&
+        userInput.current.username &&
+        userInput.current.password &&
+        userInput.current.confirm
       )
     ) {
       setEmptyFields(true);
@@ -61,7 +73,7 @@ export default function SignupScreen() {
       setEmptyFields(false);
     }
 
-    if (userInput.password !== userInput.confirm) {
+    if (userInput.current.password !== userInput.current.confirm) {
       setPasswordNotMatch(true);
       setSubmitButton(false);
       return;
@@ -81,7 +93,7 @@ export default function SignupScreen() {
         }
       }
 
-      if (!userExist) saveProfile(userInput);
+      if (!userExist) saveProfile(userInput.current);
     }
   }
 
@@ -102,7 +114,10 @@ export default function SignupScreen() {
           type="text"
           placeholder="First Name"
           onChange={(e) => {
-            setUserInput({ ...userInput, firstname: e.target.value });
+            userInput.current = {
+              ...userInput.current,
+              firstname: e.target.value,
+            };
           }}
         />
         <input
@@ -110,7 +125,10 @@ export default function SignupScreen() {
           type="text"
           placeholder="Last Name"
           onChange={(e) => {
-            setUserInput({ ...userInput, lastname: e.target.value });
+            userInput.current = {
+              ...userInput.current,
+              lastname: e.target.value,
+            };
           }}
         />
         <input
@@ -118,7 +136,7 @@ export default function SignupScreen() {
           type="number"
           placeholder="Age"
           onChange={(e) => {
-            setUserInput({ ...userInput, age: e.target.value });
+            userInput.current = { ...userInput.current, age: e.target.value };
           }}
         />
         <input
@@ -126,8 +144,11 @@ export default function SignupScreen() {
           type="text"
           placeholder="Username"
           onChange={(e) => {
-            setUserInput({ ...userInput, username: e.target.value });
-            checkUsername();
+            userInput.current = {
+              ...userInput.current,
+              username: e.target.value,
+            };
+            handleChange(e.target.value);
           }}
         />
         <input
@@ -135,7 +156,10 @@ export default function SignupScreen() {
           type="password"
           placeholder="Password"
           onChange={(e) => {
-            setUserInput({ ...userInput, password: e.target.value });
+            userInput.current = {
+              ...userInput.current,
+              password: e.target.value,
+            };
           }}
         />
         <input
@@ -143,7 +167,10 @@ export default function SignupScreen() {
           type="password"
           placeholder="Confirm"
           onChange={(e) => {
-            setUserInput({ ...userInput, confirm: e.target.value });
+            userInput.current = {
+              ...userInput.current,
+              confirm: e.target.value,
+            };
           }}
         />
         <button

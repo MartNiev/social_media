@@ -1,31 +1,32 @@
-import { useState, useEffect, use } from "react";
+import { useState, useEffect, use, useRef } from "react";
 import { validateLogin } from "@/app/utils/validation";
+import Message from "./uiMessage";
 
 export default function LoginScreen({ setProfile }) {
-  const [loginInfo, setLoginInfo] = useState({ username: "", password: "" });
-  const [validationMessage, setValidationMessage] = useState(true);
+  const loginInfo = useRef({});
+  const [passwordIncorrect, setPasswordIncorrect] = useState(false);
 
   useEffect(() => {}, []);
 
   function handleLogin() {
-    if (!(loginInfo.username && loginInfo.password)) return;
+    console.log(loginInfo.current);
+    if (!(loginInfo.current.username && loginInfo.current.password)) return;
 
     async function loadUserProfile() {
       try {
-        const response = await fetch(`/api/load/?name=${loginInfo.username}`);
+        const response = await fetch(
+          `/api/load/?name=${loginInfo.current.username}`,
+        );
         const storedUserInfo = await response.json();
 
-        const isValidated = validateLogin(storedUserInfo, loginInfo);
+        const isValidated = validateLogin(storedUserInfo, loginInfo.current);
 
         if (isValidated) {
-          setValidationMessage(true);
+          setPasswordIncorrect(false);
           setProfile(storedUserInfo);
         } else {
-          setValidationMessage(false);
+          setPasswordIncorrect(true);
         }
-
-        //console.log(storedUserInfo);
-        //console.log(isValidated);
       } catch (error) {
         alert("Error fetching api: " + error);
       }
@@ -36,16 +37,17 @@ export default function LoginScreen({ setProfile }) {
 
   return (
     <>
-      {!validationMessage && (
-        <p className="formMessage">Username or Password is incorrect</p>
-      )}
+      <Message
+        message="Username or Password is incorrect"
+        condition={passwordIncorrect}
+      />
       <form className="flex flex-col items-center gap-5 p-4">
         <input
           className="formInput"
           type="text"
           placeholder="Username"
           onChange={(e) => {
-            setLoginInfo({ ...loginInfo, username: e.target.value });
+            loginInfo.current = { username: e.target.value };
           }}
         />
         <input
@@ -53,15 +55,13 @@ export default function LoginScreen({ setProfile }) {
           type="password"
           placeholder="Password"
           onChange={(e) => {
-            setLoginInfo({ ...loginInfo, password: e.target.value });
+            loginInfo.current = {
+              ...loginInfo.current,
+              password: e.target.value,
+            };
           }}
         />
-        <button
-          // type={userExist ? "submit" : "button"}
-          type="button"
-          className="w-30 regButton"
-          onClick={handleLogin}
-        >
+        <button type="button" className="w-30 regButton" onClick={handleLogin}>
           Submit
         </button>
       </form>
