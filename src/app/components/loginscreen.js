@@ -41,7 +41,7 @@ export default function LoginScreen({ setProfile }) {
         message="Username or Password is incorrect"
         condition={passwordIncorrect}
       />
-      <form className="flex flex-col items-center gap-5 p-4">
+      <form className="flex flex-col items-center gap-5 p-4 userForm">
         <input
           className="formInput"
           type="text"

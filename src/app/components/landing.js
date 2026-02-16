@@ -12,10 +12,10 @@ export default function LandingPage({ setProfile }) {
 
   return (
     <div className="flex w-screen h-screen">
-      <div className="flex-2 flex justify-center items-center bg-blue-400">
+      <div className="flex-2 flex justify-center items-center green">
         <h2 className="name">Social</h2>
       </div>
-      <div className="flex-1 flex flex-col justify-center items-center bg-white">
+      <div className="flex-1 flex flex-col justify-center items-center">
         <div className="flex justify-center gap-4 pb-3">
           <button className="regButton" onClick={() => changeScreen(true)}>
             Login

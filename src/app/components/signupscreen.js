@@ -8,8 +8,6 @@ export default function SignupScreen() {
   const [userExist, setUserExist] = useState(null);
   const [submitButton, setSubmitButton] = useState(false);
 
-  // change to useRef
-
   const userInput = useRef({
     firstname: "",
     lastname: "",
@@ -99,7 +97,10 @@ export default function SignupScreen() {
 
   return (
     <div>
-      <form id="signupForm" className="flex flex-col items-center gap-5 p-4">
+      <form
+        id="signupForm"
+        className="flex flex-col items-center gap-5 p-4 userForm"
+      >
         <Message
           condition={passwordNotMatch}
           message="Password does NOT Match."

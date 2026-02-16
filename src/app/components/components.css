@@ -1,15 +1,23 @@
+/* #A4C4B7; Green*/
+/* #5f8578 Darker Green Button:active */
+/* #fcfaf8 Beige*/
+/* #e8e5e0; Button Dark Beige */
+/* #d6d1cb Button:Active Darker Beige */
+
+.green {
+  background-color: rgb(164, 196, 183);
+}
+
 .bt {
   height: 100%;
+  padding: 10px;
 }
 .bt:hover {
-  width: 170px;
-  padding: 10px;
-  background-color: rgba(226, 226, 226, 0.212);
+  background-color: #7c9e9167;
 }
 
 .bt:active {
-  background-color: rgb(245, 252, 255);
-  color: rgb(63, 63, 63);
+  background-color: #5f8578;
 }
 
 .name {
@@ -20,18 +28,21 @@
 }
 
 .regButton {
-  border: solid 1px rgb(236, 236, 236);
-  padding: 12px;
-  border-radius: 20px;
-  background-color: rgb(236, 236, 236);
+  border: solid 1px e6e2dd;
+  width: 80px;
+  height: 40px;
+
+  border-radius: 12px;
+  background-color: #e8e5e0;
 }
 
 .regButton:hover {
-  opacity: 80%;
+  background-color: #e8e5e07c;
 }
 
 .regButton:active {
-  background-color: rgb(245, 252, 255);
+  border: solid 1px black inset;
+  background-color: #d6d1cb;
   color: rgb(63, 63, 63);
 }
 
@@ -44,4 +55,30 @@
 .formMessage {
   color: red;
   font-size: 14px;
+}
+
+.welcome {
+  font-size: 30px;
+}
+
+.customFont {
+  font-size: 16px;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+  font-weight: 600;
+}
+
+.userForm {
+  padding: 20px;
+  background-color: white;
+  border-radius: 15px;
+
+  box-shadow: 0px 0px 5px 1px #d6d1cb;
 }

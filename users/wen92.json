@@ -6,7 +6,7 @@
   "password": "1992",
   "confirm": "1992",
   "posts": [
-    { "caption": "Baby", "imageSrc": "/images/1.JPEG" },
+    { "caption": "My Baby", "imageSrc": "/images/1.JPEG" },
     { "caption": "Baby", "imageSrc": "/images/2.JPG" }
   ]
 }

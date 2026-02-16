@@ -9,10 +9,10 @@ function LoggedIn({ profile, setProfile }) {
   return (
     <div>
       <Header setProfile={setProfile}></Header>
-      <p className="flex w-full p-5 justify-center align-middle text-lg">
-        Hello {profile.firstname}
+      <p className="flex w-full p-5 justify-center align-middle welcome">
+        Hello, {profile.firstname}
       </p>
-      <div className="flex flex-col items-center justify-center h-full p-10 gap-6">
+      <div className="flex flex-col items-center justify-center h-full gap-6">
         {profile.posts.map((p, idx) => (
           <Post {...p} key={idx + Math.random()} />
         ))}
