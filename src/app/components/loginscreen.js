@@ -2,14 +2,13 @@ import { useState, useEffect, use, useRef } from "react";
 import { validateLogin } from "@/app/utils/validation";
 import Message from "./uiMessage";
 
-export default function LoginScreen({ setProfile }) {
+export default function LoginScreen({ setProfile, setPosts }) {
   const loginInfo = useRef({});
   const [passwordIncorrect, setPasswordIncorrect] = useState(false);
 
   useEffect(() => {}, []);
 
   function handleLogin() {
-    console.log(loginInfo.current);
     if (!(loginInfo.current.username && loginInfo.current.password)) return;
 
     async function loadUserProfile() {
@@ -24,6 +23,7 @@ export default function LoginScreen({ setProfile }) {
         if (isValidated) {
           setPasswordIncorrect(false);
           setProfile(storedUserInfo);
+          setPosts(storedUserInfo.posts);
         } else {
           setPasswordIncorrect(true);
         }
@@ -41,7 +41,11 @@ export default function LoginScreen({ setProfile }) {
         message="Username or Password is incorrect"
         condition={passwordIncorrect}
       />
-      <form className="flex flex-col items-center gap-5 p-4 userForm">
+      <form
+        id="loginScreen"
+        className="flex flex-col items-center gap-5 p-4 userForm"
+      >
+        <label htmlFor="loginScreen">Log In</label>
         <input
           className="formInput"
           type="text"

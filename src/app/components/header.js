@@ -1,7 +1,11 @@
 import "./components.css";
-export default function Header({ setProfile }) {
+export default function Header({ setProfile, setCreatePostMenu }) {
   function handleSignOut() {
     setProfile(null);
+  }
+
+  function handleCreate() {
+    setCreatePostMenu(true);
   }
 
   return (
@@ -11,7 +15,9 @@ export default function Header({ setProfile }) {
       </div>
       <nav className="flex-1 flex justify-center w-50 h-full customFont">
         <button className="bt">Profile</button>
-        <button className="bt">Create</button>
+        <button className="bt" onClick={handleCreate}>
+          Create
+        </button>
         <button className="bt">Follow</button>
         <button className="bt" onClick={handleSignOut}>
           Signout

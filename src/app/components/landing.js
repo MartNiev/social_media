@@ -3,7 +3,7 @@ import { useState, useEffect, use } from "react";
 import SignupScreen from "./signupscreen";
 import LoginScreen from "./loginscreen";
 
-export default function LandingPage({ setProfile }) {
+export default function LandingPage({ setProfile, setPosts }) {
   const [form, setForm] = useState(true);
 
   function changeScreen(stateValue) {
@@ -24,7 +24,11 @@ export default function LandingPage({ setProfile }) {
             Signup
           </button>
         </div>
-        {form ? <LoginScreen setProfile={setProfile} /> : <SignupScreen />}
+        {form ? (
+          <LoginScreen setProfile={setProfile} setPosts={setPosts} />
+        ) : (
+          <SignupScreen />
+        )}
       </div>
     </div>
   );
