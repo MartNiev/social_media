@@ -1,8 +1,6 @@
 import "@/app/components/components.css";
 import { useEffect, useState } from "react";
 
-function dragAndDrop() {}
-
 export default function CreatePost({ setCreatePostMenu, posts, setPosts }) {
 	const [caption, setCaption] = useState("");
 	const [fileLocation, setFileLocation] = useState("");
