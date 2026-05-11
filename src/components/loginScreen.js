@@ -19,7 +19,7 @@ export default function LoginScreen() {
 		if (!profile) return setPasswordIncorrect(true);
 
 		console.log(profile);
-		router.push("/dashboard");
+		router.push("/user/dashboard");
 	}
 
 	return (

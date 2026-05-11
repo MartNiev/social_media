@@ -7,6 +7,12 @@
 	"confirm": "1992",
 	"posts": [
 		{ "caption": "My Baby", "imageSrc": "/images/1.JPEG" },
-		{ "caption": "Baby", "imageSrc": "/images/2.JPG" }
+		{ "caption": "Baby", "imageSrc": "/images/2.JPG" },
+		{ "caption": "My Baby", "imageSrc": "/images/1.JPEG" },
+		{ "caption": "Baby", "imageSrc": "/images/2.JPG" },
+		{ "caption": "My Baby", "imageSrc": "/images/1.JPEG" },
+		{ "caption": "Baby", "imageSrc": "/images/2.JPG" },
+		{ "caption": "My Baby", "imageSrc": "/images/1.JPEG" },
+		{ "caption": "Beautiful View", "imageSrc": "/images/W11.jpg" }
 	]
 }

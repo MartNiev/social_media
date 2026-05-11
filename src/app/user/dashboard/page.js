@@ -1,4 +1,3 @@
-import Header from "@/components/header";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import Post from "@/components/post";
@@ -22,17 +21,17 @@ export default async function Dashboard() {
 
 	if (!profileObj) return redirect("/");
 
-	console.log(profileObj);
+	if (profileObj.posts.length === 0) return <></>;
 
 	return (
-		<div>
-			<Header></Header>
-			<p className="welcome">Hello, {profileObj && profileObj.firstname}</p>;
-			<div className="postsContainer">
-				{profileObj.posts.map((p, idx) => (
-					<Post {...p} key={idx + Math.random()} />
-				))}
+		<>
+			<div className="gridcontainer">
+				<div className="postsContainer">
+					{profileObj.posts.map((p, idx) => (
+						<Post {...p} key={idx + Math.random()} />
+					))}
+				</div>
 			</div>
-		</div>
+		</>
 	);
 }

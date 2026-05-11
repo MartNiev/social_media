@@ -176,6 +176,20 @@
 	background-color: rgba(90, 90, 90, 0.452);
 }
 
+.createWindow {
+	backdrop-filter: blur(4px);
+	animation: blurBG 0.09s ease forwards;
+}
+
+@keyframes blurBG {
+	from {
+		backdrop-filter: blur(0px);
+	}
+	to {
+		backdrop-filter: blur(4px);
+	}
+}
+
 .postForm {
 	display: flex;
 	flex-direction: column;
@@ -188,6 +202,26 @@
 	border-radius: 15px;
 	box-shadow: 0px 0px 6px 1px rgba(90, 90, 90, 0.349);
 	gap: 10px;
+	animation: postWindow 0.25s ease forwards;
+}
+
+@keyframes postWindow {
+	from {
+		opacity: 0;
+		transform: scale(99%);
+	}
+	to {
+		opacity: 1;
+		transform: scale(100%);
+	}
+}
+
+.imageLabel {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 #caption {
@@ -281,35 +315,58 @@
 	background-color: #e5e7eb;
 }
 
-.postsContainer {
+.gridcontainer {
 	display: flex;
-	flex-direction: column;
+	width: 100%;
 	justify-content: center;
-	align-items: center;
-	height: 100%;
-	gap: 24px;
+}
+
+.postsContainer {
+	display: grid;
+	grid-template-columns: repeat(4, auto);
+	padding: 8px;
+	gap: 8px;
+	background-color: #d6d1cb;
+	border-radius: 4px;
+
+	/* place-items: center;
+	justify-content: center; */
+	/* width: fit-content; */
+	/* box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.507); */
+	/* background-color: #5f8578; */
+	/* height: 100%; */
+	/* width: fit-content; */
+	/* grid-auto-flow: column; */
+	/* display: flex;
+	flex-direction: column; */
+	/* align-items: center; */
+	/* gap: 15px; */
 }
 
 .postCard {
-	display: flex;
-	flex-direction: column;
-	width: 512px;
-	height: 500px;
-	border-radius: 12px;
-	padding: 12px;
-	gap: 8px;
-	background-color: #e8e5e0;
-	box-shadow: 0px 0px 6px 1px rgba(90, 90, 90, 0.349);
+	gap: 2px;
+	border-radius: 2px;
+	/* width: 300px; */
+
+	/* border-radius: 12px; */
+	/* padding: 8px; */
+
+	/* background-color: #e8e5e0; */
+	/* box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.507); */
 }
 
 .cardImage {
 	display: flex;
 	justify-content: center;
-	align-items: center;
+	border-radius: 2px;
 	width: 100%;
-	height: 91%;
-	border-radius: 4px;
-	background-color: white;
+	height: 100%;
+	align-items: center;
+	background-color: rgb(0, 0, 0);
+}
+
+.image {
+	border-radius: 2px;
 }
 
 .cardCaption {
@@ -321,8 +378,4 @@
 	border-radius: 4px;
 	font-size: 14px;
 	background-color: white;
-}
-
-.image {
-	height: 100%;
 }

@@ -1,4 +1,5 @@
-import "./components.css";
+"use client";
+import "@/components/components.css";
 import { useEffect, useState } from "react";
 
 export default function CreatePost({ setCreatePostMenu, posts, setPosts }) {
@@ -54,8 +55,8 @@ export default function CreatePost({ setCreatePostMenu, posts, setPosts }) {
 						elem.files = dataTransfer.files;
 					}}
 				>
-					<label htmlFor="file" className="imageLabel">
-						<img id="uploadImage" src="/upload-alt.svg"></img>
+					<label htmlFor="filepath">
+						<img id="uploadImage" src="./upload-alt.svg"></img>
 					</label>
 					<input
 						type="file"
@@ -67,7 +68,7 @@ export default function CreatePost({ setCreatePostMenu, posts, setPosts }) {
 						onChange={(e) => {
 							setFileLocation(e.target.value);
 						}}
-						single="true"
+						single
 					/>
 				</div>
 				<div className="flex gap-4">

@@ -5,11 +5,22 @@ export default function Post({ caption, imageSrc }) {
 	return (
 		<div className="postCard">
 			<div className="cardImage">
-				{imageSrc && <img src={imageSrc} alt="Post Image" className="image" />}
+				{imageSrc && (
+					<Image
+						src={imageSrc}
+						alt="Post Image"
+						className="image"
+						width={300}
+						height={300}
+						// onClick={() => {
+						// 	console.log("Hello");
+						// }}
+					/>
+				)}
 			</div>
-			<div className="cardCaption">
+			{/* <div className="cardCaption">
 				<p>{caption}</p>
-			</div>
+			</div> */}
 		</div>
 	);
 }
