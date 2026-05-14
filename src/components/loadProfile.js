@@ -14,7 +14,6 @@ async function createCookie(profileObj) {
 }
 
 export default async function loadProfile(loginInfo) {
-	console.log(loginInfo);
 	try {
 		const response = await fetch(`http:/localhost:3000/api/load/?name=${loginInfo.username}`, {
 			method: "GET",

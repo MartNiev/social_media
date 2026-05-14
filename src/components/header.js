@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import CreatePost from "./createPost";
 
-export default function Header() {
+export default function Header({ profileObj }) {
 	const [createPostMenu, setCreatePostMenu] = useState(false);
 
 	async function deleteCookie() {
@@ -29,7 +29,9 @@ export default function Header() {
 
 	return (
 		<>
-			{createPostMenu && <CreatePost setCreatePostMenu={setCreatePostMenu} />}
+			{createPostMenu && (
+				<CreatePost setCreatePostMenu={setCreatePostMenu} profileObj={profileObj} />
+			)}
 			<div className="header">
 				<div className="customFont">
 					<p>The Social</p>

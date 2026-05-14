@@ -1,30 +1,46 @@
+"use client";
 import "./components.css";
 import { useEffect, useState } from "react";
 
-export default function CreatePost({ setCreatePostMenu, posts, setPosts }) {
+export default function CreatePost({ setCreatePostMenu, profileObj }) {
 	const [caption, setCaption] = useState("");
-	const [fileLocation, setFileLocation] = useState("");
+	const [file, setFile] = useState("");
 	const [submitButton, setSubmitButton] = useState(true);
 
 	useEffect(() => {}, []);
 
 	function handleSave() {
-		if (caption === "" && fileLocation === "") {
-			setSubmitButton(false);
-			return;
-		} else {
-			setCreatePostMenu(false);
+		if (caption === "" && file === "") {
+			return setSubmitButton(false);
+		} else if (caption === "" || file === "") {
+			return setSubmitButton(false);
 		}
 
-		const filename = "/images/" + fileLocation.split("\\")[2];
+		async function sendFileRequest(fileData, username) {
+			try {
+				const formData = new FormData();
+				formData.append("file", fileData);
+				console.log(username);
+				let response = await fetch(`/api/saveImage?username=${username}`, {
+					method: "POST",
+					body: formData,
+				});
 
-		const newPost = { caption: caption, imageSrc: filename };
+				const res = await response.json();
+				console.log(res);
 
-		setPosts([...posts, newPost]);
+				if (!response.ok) console.log("Did not work");
+			} catch (err) {
+				console.log("Error: " + err.message);
+			}
 
-		// Save the new post using API save to save for later
+			setSubmitButton(true);
+
+			// setPosts([...posts, newPost]);
+		}
+
+		sendFileRequest(file, profileObj.username);
 	}
-
 	return (
 		<div className="createWindow">
 			<form className="postForm">
@@ -65,15 +81,15 @@ export default function CreatePost({ setCreatePostMenu, posts, setPosts }) {
 						hidden={true}
 						accept={[".jpg", ".png", ".jpeg"]}
 						onChange={(e) => {
-							setFileLocation(e.target.value);
+							setFile(e.target.files[0]);
 						}}
 						single="true"
 					/>
 				</div>
 				<div className="flex gap-4">
 					<button
-						type="button"
-						// type={submitButton ? "submit" : "button"}
+						// type="button"
+						type={submitButton ? "submit" : "button"}
 						className="regButton"
 						onClick={handleSave}
 					>

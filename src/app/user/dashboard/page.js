@@ -1,6 +1,9 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import Post from "@/components/post";
+import Header from "@/components/header";
+import WelcomeMessage from "@/components/welcomeMessage";
+import Test from "@/components/test";
 
 async function getCookie() {
 	try {
@@ -21,17 +24,18 @@ export default async function Dashboard() {
 
 	if (!profileObj) return redirect("/");
 
-	if (profileObj.posts.length === 0) return <></>;
-
 	return (
-		<>
+		<div>
+			<Header profileObj={profileObj} />
+			<WelcomeMessage />
 			<div className="gridcontainer">
+				{/* <Test profileObj={profileObj} /> */}
 				<div className="postsContainer">
-					{profileObj.posts.map((p, idx) => (
-						<Post {...p} key={idx + Math.random()} />
+					{profileObj.posts.map((post, idx) => (
+						<Post {...post} key={idx + Math.random()} />
 					))}
 				</div>
 			</div>
-		</>
+		</div>
 	);
 }

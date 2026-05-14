@@ -1,29 +1,26 @@
 import fs from "fs";
 import path from "path";
+import { NextResponse } from "next/server";
 
 export async function POST(req) {
-  try {
-    const object = await req.json(); //JS object set by fetch() (not string)
+	try {
+		const object = await req.json(); //JS object set by fetch() (not string)
 
-    const filename = `${object.username}.json`;
+		const filename = `${object.username}.json`;
 
-    const filePath = path.join(process.cwd(), "users", filename);
+		const filePath = path.join(process.cwd(), "users", filename);
 
-    const userListPath = path.join(process.cwd(), "users", "userList.json");
+		const userListPath = path.join(process.cwd(), "users", "userList.json");
 
-    const userObject = JSON.parse(fs.readFileSync(userListPath, "utf-8"));
-    userObject.username.push(object.username);
+		const userObject = JSON.parse(fs.readFileSync(userListPath, "utf-8"));
+		userObject.username.push(object.username);
 
-    fs.writeFileSync(filePath, JSON.stringify(object, null, 2), "utf-8"); //writes file string version object to json file
-    fs.writeFileSync(
-      userListPath,
-      JSON.stringify(userObject, null, 2),
-      "utf-8",
-    );
+		fs.writeFileSync(filePath, JSON.stringify(object, null, 2), "utf-8"); //writes file string version object to json file
+		fs.writeFileSync(userListPath, JSON.stringify(userObject, null, 2), "utf-8");
 
-    return Response.json({ success: true });
-  } catch (error) {
-    console.error("Error writing file:", error.message);
-    return Response.json({ error: error.message }, { status: 500 });
-  }
+		return NextResponse.json({ success: true });
+	} catch (error) {
+		console.error("Error writing file:", error.message);
+		return NextResponse.json({ error: error.message }, { status: 500 });
+	}
 }

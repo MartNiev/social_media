@@ -7,11 +7,5 @@ export const metadata = {
 };
 
 export default function UserLayout({ children }) {
-	return (
-		<section>
-			<Header />
-			<WelcomeMessage />
-			{children}
-		</section>
-	);
+	return <section>{children}</section>;
 }

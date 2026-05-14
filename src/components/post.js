@@ -11,7 +11,9 @@ export default function Post({ caption, imageSrc }) {
 						alt="Post Image"
 						className="image"
 						width={300}
-						height={300}
+						height={400}
+						loading="eager"
+						draggable="false"
 						// onClick={() => {
 						// 	console.log("Hello");
 						// }}

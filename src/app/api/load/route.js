@@ -13,7 +13,6 @@ export async function GET(req) {
 		const name = searchParams.get("name");
 
 		const filename = `${name}.json`;
-		// Get the username from req as it being pass as part of the request header
 
 		const filepath = path.join(process.cwd(), "users", filename);
 
@@ -22,6 +21,6 @@ export async function GET(req) {
 
 		return NextResponse.json(userProfileObject);
 	} catch (error) {
-		return Response.json({ success: false });
+		return NextResponse.json({ success: false });
 	}
 }
