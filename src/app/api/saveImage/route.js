@@ -70,16 +70,13 @@ export async function POST(req) {
 
 			if (err) return console.log("Error in metadata:", err);
 
-			console.log(width, height);
 			let aspectRatio = getAspectRatio(height, width);
 
 			if (aspectRatio[0] === 3 && aspectRatio[1] === 4) {
-				console.log("running");
 				writeFile(filePath);
 				return;
 			} else {
 				let pos = convertAspectRatio(height, width);
-				console.log(pos);
 
 				sharp(buffer)
 					.extract({ left: pos.left, top: pos.top, width: pos.width, height: pos.height })

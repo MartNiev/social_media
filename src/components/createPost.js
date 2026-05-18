@@ -1,6 +1,7 @@
 "use client";
 import "./components.css";
 import { useEffect, useState } from "react";
+import { useRoute } from "next/navigation";
 
 export default function CreatePost({ setCreatePostMenu, profileObj }) {
 	const [caption, setCaption] = useState("");

@@ -6,12 +6,12 @@ export default function Post({ caption, imageSrc }) {
 		<div className="postCard">
 			<div className="cardImage">
 				{imageSrc && (
-					<Image
+					<img
 						src={imageSrc}
 						alt="Post Image"
 						className="image"
-						width={300}
-						height={400}
+						// height={400}
+						// width={300}
 						loading="eager"
 						draggable="false"
 						// onClick={() => {
