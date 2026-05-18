@@ -41,5 +41,5 @@ yarn-error.log*
 next-env.d.ts
 
 #user data
-./users/
+users/
 /src/userImages/
