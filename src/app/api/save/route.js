@@ -1,10 +1,11 @@
 import fs from "fs";
+import { mkdir } from "fs/promises";
 import path from "path";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
 	try {
-		const object = await req.json(); //JS object set by fetch() (not string)
+		const object = await req.json();
 
 		const filename = `${object.username}.json`;
 
@@ -15,7 +16,11 @@ export async function POST(req) {
 		const userObject = JSON.parse(fs.readFileSync(userListPath, "utf-8"));
 		userObject.username.push(object.username);
 
-		fs.writeFileSync(filePath, JSON.stringify(object, null, 2), "utf-8"); //writes file string version object to json file
+		const imageFolderPath = path.join(process.cwd(), "src/userImages", object.username);
+
+		await mkdir(imageFolderPath, { recursive: true });
+
+		fs.writeFileSync(filePath, JSON.stringify(object, null, 2), "utf-8");
 		fs.writeFileSync(userListPath, JSON.stringify(userObject, null, 2), "utf-8");
 
 		return NextResponse.json({ success: true });

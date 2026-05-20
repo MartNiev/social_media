@@ -61,6 +61,8 @@ export async function POST(req) {
 		await fs.mkdir(userImageFolder, { recursive: true });
 		let filePath = path.join(process.cwd(), "src/userImages", username, file.name);
 
+		//`${Math.random() * 100}${file.name}`
+
 		const bytes = await file.arrayBuffer();
 		const buffer = Buffer.from(bytes);
 

@@ -168,7 +168,7 @@ export default function SignupScreen() {
 					}}
 				/>
 				<button
-					//type="button"
+					// type="button"
 					type={submitButton ? "submit" : "button"}
 					className="w-30 regButton"
 					onClick={handleSignUp}

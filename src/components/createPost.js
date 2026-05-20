@@ -17,6 +17,22 @@ export default function CreatePost({ setCreatePostMenu, profileObj }) {
 			return setSubmitButton(false);
 		}
 
+		async function editRequest(username, filename) {
+			try {
+				let response = fetch(`/api/edit?username=${username}`, {
+					method: "PUT",
+					body: JSON.stringify({
+						caption: caption,
+						imageSrc: `/api/loadImages/${username}/${filename}`,
+					}),
+				});
+
+				if (response.ok) console.log(await response.json());
+			} catch (error) {
+				console.log(error);
+			}
+		}
+
 		async function sendFileRequest(fileData, username) {
 			try {
 				const formData = new FormData();
@@ -28,9 +44,20 @@ export default function CreatePost({ setCreatePostMenu, profileObj }) {
 				});
 
 				const res = await response.json();
-				console.log(res);
+				editRequest(profileObj.username, file.name);
 
-				if (!response.ok) console.log("Did not work");
+				if (!response.ok) {
+					console.log("Did not work");
+				} else {
+					sessionStorage.setItem(
+						"reloadPost",
+						JSON.stringify({
+							caption: caption,
+							imageSrc: `/api/loadImages/${profileObj.username}/${file.name}`,
+						}),
+					);
+					setCreatePostMenu(false);
+				}
 			} catch (err) {
 				console.log("Error: " + err.message);
 			}

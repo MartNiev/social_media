@@ -1,5 +1,4 @@
 import "./components.css";
-import Image from "next/image";
 
 export default function Post({ caption, imageSrc }) {
 	return (
@@ -10,10 +9,9 @@ export default function Post({ caption, imageSrc }) {
 						src={imageSrc}
 						alt="Post Image"
 						className="image"
-						// height={400}
-						// width={300}
 						loading="eager"
 						draggable="false"
+
 						// onClick={() => {
 						// 	console.log("Hello");
 						// }}

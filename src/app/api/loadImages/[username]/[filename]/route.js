@@ -3,8 +3,9 @@ import fs from "fs/promises";
 import path from "path";
 
 export async function GET(req, { params }) {
+	await req;
 	const { username, filename } = await params;
-	console.log("[DEBUG", username);
+
 	try {
 		const imagePath = path.join(process.cwd(), "src/userImages", username, filename);
 		let image = await fs.readFile(imagePath);
@@ -12,7 +13,7 @@ export async function GET(req, { params }) {
 
 		return new NextResponse(image, {
 			headers: {
-				"Content-Type": `image/JPG`,
+				"Content-Type": `image/${fileType.toLowerCase()}`,
 				"Cache-Control": "private, max-age=86400", // cache for 1 day
 			},
 		});
