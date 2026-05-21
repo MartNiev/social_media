@@ -18,7 +18,6 @@ export default function LoginScreen() {
 
 		if (!profile) return setPasswordIncorrect(true);
 
-		console.log(profile);
 		router.push("/user/dashboard");
 	}
 

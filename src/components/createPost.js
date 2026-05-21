@@ -35,16 +35,20 @@ export default function CreatePost({ setCreatePostMenu, profileObj }) {
 
 		async function sendFileRequest(fileData, username) {
 			try {
+				let fileOGName = file.name.split(".")[0];
+				let fileType = file.name.split(".")[1];
+				let fileName = `${fileOGName}${Math.round(Math.random() * 10)}.${fileType.toLowerCase()}`;
+
 				const formData = new FormData();
 				formData.append("file", fileData);
 				console.log(username);
-				let response = await fetch(`/api/saveImage?username=${username}`, {
+				let response = await fetch(`/api/saveImage?username=${username}&filename=${fileName}`, {
 					method: "POST",
 					body: formData,
 				});
 
 				const res = await response.json();
-				editRequest(profileObj.username, file.name);
+				editRequest(profileObj.username, fileName);
 
 				if (!response.ok) {
 					console.log("Did not work");
@@ -53,7 +57,7 @@ export default function CreatePost({ setCreatePostMenu, profileObj }) {
 						"reloadPost",
 						JSON.stringify({
 							caption: caption,
-							imageSrc: `/api/loadImages/${profileObj.username}/${file.name}`,
+							imageSrc: `/api/loadImages/${profileObj.username}/${fileName}`,
 						}),
 					);
 					setCreatePostMenu(false);

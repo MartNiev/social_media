@@ -10,7 +10,7 @@ async function createCookie(profileObj) {
 
 	if (cookieExist) cookie.delete("user");
 
-	cookie.set("user", JSON.stringify(profileObj));
+	cookie.set("user", JSON.stringify(profileObj), { maxAge: 1800 });
 }
 
 export default async function loadProfile(loginInfo) {

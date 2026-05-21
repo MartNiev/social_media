@@ -477,3 +477,36 @@
 	font-size: 14px;
 	background-color: #d6d1cb;
 }
+
+.noPostContainer {
+	width: 100%;
+	height: 80vh;
+	/* padding-top: 1%; */
+	display: flex;
+	justify-content: center;
+}
+
+.noPostCard {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 15px;
+	width: 650px;
+	height: 512px;
+	background-color: #fcfaf8;
+	border-radius: 15px;
+	box-shadow: 0px 0px 6px 0px rgba(90, 90, 90, 0.349);
+}
+
+.noPostMessage {
+	font-size: 23px;
+}
+
+/* #A4C4B7; Green*/
+/* #5f8578 Darker Green Button:active */
+/* #fcfaf8 Beige*/
+/* #e8e5e0; Button Dark Beige */
+/* #d6d1cb  Beige */
+/* #d6d1cb Button:Active Darker Beige */
+/* #b2a496 Darkest Beige */

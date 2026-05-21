@@ -25,19 +25,16 @@ export default async function Dashboard() {
 	let profileObj = await getCookie();
 
 	if (!profileObj) return redirect("/");
-
+	// Fixed the problem when the user has no post and user adds the first post then the pos
 	return (
 		<div>
 			<Header profileObj={profileObj} />
 			<WelcomeMessage />
-			{/* <div className="postsContainer"> </div>*/}
-			<div className="gridcontainer">
-				<PostsContainer>
-					{profileObj.posts.map((post, idx) => (
-						<Post {...post} key={idx + Math.random()} />
-					))}
-				</PostsContainer>
-			</div>
+			<PostsContainer profileObj={profileObj}>
+				{profileObj.posts.map((post, idx) => (
+					<Post {...post} key={idx + Math.random()} />
+				))}
+			</PostsContainer>
 		</div>
 	);
 }

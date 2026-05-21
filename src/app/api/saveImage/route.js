@@ -52,6 +52,7 @@ export async function POST(req) {
 	try {
 		const { searchParams } = new URL(req.url);
 		const username = searchParams.get("username");
+		const fileName = searchParams.get("filename");
 
 		const request = await req.formData();
 		const file = request.get("file");
@@ -59,9 +60,8 @@ export async function POST(req) {
 		let userImageFolder = path.join(process.cwd(), "src/userImages", username);
 
 		await fs.mkdir(userImageFolder, { recursive: true });
-		let filePath = path.join(process.cwd(), "src/userImages", username, file.name);
 
-		//`${Math.random() * 100}${file.name}`
+		let filePath = path.join(process.cwd(), "src/userImages", username, fileName);
 
 		const bytes = await file.arrayBuffer();
 		const buffer = Buffer.from(bytes);
