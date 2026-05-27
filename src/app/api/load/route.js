@@ -1,20 +1,21 @@
 import fs from "fs";
 import { NextResponse } from "next/server";
 import path from "path";
+import { use } from "react";
 
-export async function GET(req) {
+export async function POST(req) {
 	try {
-		const { searchParams } = new URL(req.url);
-		const name = searchParams.get("name");
+		let data = await req.json();
+		const username = data.user;
+		console.log(username);
 
-		const filename = `${name}.json`;
+		const filepath = path.join(process.cwd(), "users", "userList.json");
 
-		const filepath = path.join(process.cwd(), "users", filename);
+		const readingUserList = fs.readFileSync(filepath, "utf-8");
+		const userList = JSON.parse(readingUserList);
+		const userObject = userList[username];
 
-		const readingJSONFile = fs.readFileSync(filepath, "utf-8");
-		const userProfileObject = JSON.parse(readingJSONFile);
-
-		return NextResponse.json(userProfileObject);
+		return NextResponse.json(userObject);
 	} catch (error) {
 		return NextResponse.json({ success: false });
 	}

@@ -22,6 +22,20 @@ export function SearchResults({ username, firstname, isFound }) {
 	);
 }
 
+async function loadProfile(username) {
+	try {
+		let response = await fetch("/api/load", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ user: username }),
+		});
+
+		let data = await response.json();
+
+		return data;
+	} catch (error) {}
+}
+
 export default function Search() {
 	const [showResult, setShowResult] = useState(false);
 	const [isFound, setIsFound] = useState(true);
@@ -33,15 +47,22 @@ export default function Search() {
 
 		async function requestProfile(username) {
 			try {
-				let response = await fetch(`/api/load?name=${username}`);
+				let response = await fetch(`/api/searchUser`, {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ user: username }),
+				});
 
 				if (response.ok) {
 					var data = await response.json();
 					console.log(data);
 
-					if (data.success === false) {
+					if (data.userFound === false) {
 						setIsFound(false);
 					} else {
+						let data = await loadProfile(username);
+						console.log(data);
+
 						setUsername(data.username);
 						setfirstname(data.firstname);
 						setIsFound(true);

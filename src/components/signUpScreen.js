@@ -2,6 +2,9 @@
 import { useEffect, useState, useRef } from "react";
 import Message from "@/components/uiMessage";
 
+let cacheUser;
+let cacheUserFound;
+
 export default function SignupScreen() {
 	const [passwordNotMatch, setPasswordNotMatch] = useState(false);
 	const [emptyFields, setEmptyFields] = useState(false);
@@ -18,41 +21,37 @@ export default function SignupScreen() {
 		posts: [],
 	});
 
-	const usersList = useRef([]);
+	async function searchUser(username) {
+		try {
+			let response = await fetch("/api/searchUser", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ user: username }),
+			});
 
-	useEffect(() => {
-		async function loadUserList() {
-			try {
-				const response = await fetch("/api/load?name=userList");
-				const userList = await response.json();
+			let data = await response.json();
 
-				for (const user of userList.username) {
-					usersList.current.push(user);
-				}
+			return data.userFound;
+		} catch (error) {}
+	}
 
-				setUserExist(false);
-				setSubmitButton(true);
-			} catch (error) {
-				alert("Error loading file: " + error.message);
+	async function handleSignUp() {
+		if (userInput.current.username !== cacheUser) {
+			var userFound = await searchUser(userInput.current.username);
+			cacheUser = userInput.current.username;
+			if (userFound) {
+				cacheUserFound = true;
+			} else {
+				cacheUserFound = false;
 			}
 		}
 
-		loadUserList();
-	}, []);
-
-	let users = new Set(usersList.current);
-
-	function handleChange(value) {
-		if (users.has(value)) {
+		if (userFound || cacheUserFound) {
 			setUserExist(true);
 			return;
-		} else {
+		} else if (!userFound) {
 			setUserExist(false);
 		}
-	}
-
-	function handleSignUp() {
-		console.log(users);
 
 		let isEmpty = !(
 			userInput.current.firstname &&
@@ -142,7 +141,6 @@ export default function SignupScreen() {
 							...userInput.current,
 							username: e.target.value,
 						};
-						handleChange(e.target.value);
 					}}
 				/>
 				<input

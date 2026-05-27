@@ -15,8 +15,10 @@ async function createCookie(profileObj) {
 
 export default async function loadProfile(loginInfo) {
 	try {
-		const response = await fetch(`http:/localhost:3000/api/load/?name=${loginInfo.username}`, {
-			method: "GET",
+		const response = await fetch(`http:/localhost:3000/api/load/`, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ user: loginInfo.username }),
 		});
 		let storedUserInfo = await response.json();
 		const isValidated = validateLogin(storedUserInfo, loginInfo);
