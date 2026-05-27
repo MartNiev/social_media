@@ -1,13 +1,12 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import fs from "fs/promises";
-import path from "path";
+
 import Post from "@/components/post";
 import Header from "@/components/header";
 import WelcomeMessage from "@/components/welcomeMessage";
 import PostsContainer from "@/components/postContainer";
 
-async function getCookie() {
+export async function getCookie() {
 	try {
 		const cookie = await cookies();
 
@@ -24,12 +23,12 @@ async function getCookie() {
 export default async function Dashboard() {
 	let profileObj = await getCookie();
 
-	if (!profileObj) return redirect("/");
-	// Fixed the problem when the user has no post and user adds the first post then the pos
+	if (!profileObj) redirect("/");
+
 	return (
 		<div>
 			<Header profileObj={profileObj} />
-			<WelcomeMessage />
+			<p className="welcome">My Posts</p>;
 			<PostsContainer profileObj={profileObj}>
 				{profileObj.posts.map((post, idx) => (
 					<Post {...post} key={idx + Math.random()} />

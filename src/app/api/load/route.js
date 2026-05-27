@@ -1,14 +1,9 @@
-"use server";
 import fs from "fs";
 import { NextResponse } from "next/server";
 import path from "path";
-import { cookies } from "cookies-next";
-import { getCookie } from "cookies-next";
 
 export async function GET(req) {
 	try {
-		await req;
-
 		const { searchParams } = new URL(req.url);
 		const name = searchParams.get("name");
 

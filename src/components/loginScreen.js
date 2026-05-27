@@ -18,7 +18,7 @@ export default function LoginScreen() {
 
 		if (!profile) return setPasswordIncorrect(true);
 
-		router.push("/user/dashboard");
+		router.push("/user/feed");
 	}
 
 	return (
@@ -34,6 +34,12 @@ export default function LoginScreen() {
 					onChange={(e) => {
 						loginInfo.current = { username: e.target.value };
 					}}
+					onKeyDown={(e) => {
+						if (e.key === "Enter") {
+							console.log("Enter");
+							handleLogin();
+						}
+					}}
 				/>
 				<input
 					className="formInput"
@@ -44,6 +50,11 @@ export default function LoginScreen() {
 							...loginInfo.current,
 							password: e.target.value,
 						};
+					}}
+					onKeyDown={(e) => {
+						if (e.key === "Enter") {
+							handleLogin();
+						}
 					}}
 				/>
 				<button type="button" className="w-30 regButton" onClick={handleLogin}>

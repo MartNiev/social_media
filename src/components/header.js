@@ -33,9 +33,9 @@ export default function Header({ profileObj }) {
 				<CreatePost setCreatePostMenu={setCreatePostMenu} profileObj={profileObj} />
 			)}
 			<div className="header">
-				<div className="customFont">
+				{/* <div className="customFont">
 					<p>The Social</p>
-				</div>
+				</div> */}
 				<nav className="navButtons">
 					<button
 						className="bt"
@@ -48,7 +48,7 @@ export default function Header({ profileObj }) {
 					<button
 						className="bt"
 						onClick={() => {
-							router.push("/user/dashboard");
+							router.push("/user/profile");
 						}}
 					>
 						Profile
@@ -56,14 +56,18 @@ export default function Header({ profileObj }) {
 					<button className="bt" onClick={handleCreate}>
 						Create
 					</button>
-
+					<button
+						className="bt"
+						onClick={() => {
+							router.push("/user/search");
+						}}
+					>
+						Search
+					</button>
 					<button className="bt" onClick={handleSignOut}>
 						Signout
 					</button>
 				</nav>
-				<div className="searchContainer">
-					<input className="searchBar" type="text" id="search" name="search" placeholder="Search" />
-				</div>
 			</div>
 		</>
 	);

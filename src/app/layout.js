@@ -1,5 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -12,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-	title: "Welcome to Social",
+	title: "Social",
 };
 
 export default function RootLayout({ children }) {

@@ -3,7 +3,7 @@ import Header from "@/components/header";
 import WelcomeMessage from "@/components/welcomeMessage";
 
 export const metadata = {
-	title: "Welcome Page",
+	title: "Home",
 };
 
 export default function UserLayout({ children }) {
