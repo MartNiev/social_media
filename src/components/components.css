@@ -118,14 +118,13 @@
 	border: solid 1px e6e2dd;
 	width: 80px;
 	height: 40px;
-
 	border-radius: 12px;
 	background-color: #e8e5e0;
 }
 
 .regButton:hover {
 	background-color: #e8e5e07c;
-	transform: scale(106%);
+	transform: scale(105%);
 	transition: 10ms ease-in;
 }
 
@@ -133,7 +132,7 @@
 	/* background-color: #e8e5e036; */
 	border: solid 1px black inset;
 	color: rgb(63, 63, 63);
-	animation: btActive 20ms ease-in-out;
+	animation: btActive 25ms ease-in-out;
 }
 
 @keyframes btActive {
@@ -601,10 +600,13 @@
 	}
 }
 
-/* #A4C4B7; Green*/
-/* #5f8578 Darker Green Button:active */
-/* #fcfaf8 Beige*/
-/* #e8e5e0; Button Dark Beige */
-/* #d6d1cb  Beige */
-/* #d6d1cb Button:Active Darker Beige */
-/* #b2a496 Darkest Beige */
+.viewPageMessage {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.viewPosts {
+	padding: 20px;
+	font-size: 30px;
+}

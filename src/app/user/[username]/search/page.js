@@ -1,10 +1,16 @@
 import Search from "@/components/search";
-import { getCookie } from "@/app/user/profile/page";
+import { getCookie } from "@/utils/userProfile";
 import { redirect } from "next/navigation";
+import Header from "@/components/header";
 
 export default async function ComponentName() {
 	let profileObj = await getCookie();
 	if (!profileObj) redirect("/");
 
-	return <Search />;
+	return (
+		<div>
+			<Header profileObj={profileObj} />
+			<Search profileObj={profileObj} />
+		</div>
+	);
 }

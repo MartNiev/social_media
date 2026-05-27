@@ -1,16 +1,23 @@
 "use client";
 import "@/components/components.css";
-import Header from "@/components/header";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
-export function SearchResults({ username, firstname, isFound }) {
+export function SearchResults({ username, firstname, isFound, profileObj }) {
+	const router = useRouter();
+
 	return (
 		<div className="resultSection">
 			{isFound ? (
 				<p
 					className="result"
 					onClick={() => {
-						// Add route to a view of the profile
+						if (username === profileObj.username) {
+							router.push(`/user/${profileObj.username}/feed`);
+							return;
+						}
+
+						router.push(`/user/${username}/view_profile`);
 					}}
 				>
 					{username}, {firstname}
@@ -36,7 +43,7 @@ async function loadProfile(username) {
 	} catch (error) {}
 }
 
-export default function Search() {
+export default function Search({ profileObj }) {
 	const [showResult, setShowResult] = useState(false);
 	const [isFound, setIsFound] = useState(true);
 	const [username, setUsername] = useState("");
@@ -80,7 +87,6 @@ export default function Search() {
 
 	return (
 		<div className="searchSection">
-			<Header />
 			<div className="searchContainer">
 				<input
 					type="text"
@@ -94,7 +100,12 @@ export default function Search() {
 				></input>
 
 				{showResult && (
-					<SearchResults username={username} firstname={firstname} isFound={isFound} />
+					<SearchResults
+						username={username}
+						firstname={firstname}
+						isFound={isFound}
+						profileObj={profileObj}
+					/>
 				)}
 			</div>
 		</div>

@@ -1,26 +1,10 @@
-import { cookies } from "next/headers";
+import { getCookie } from "@/utils/userProfile";
 import { redirect } from "next/navigation";
-
 import Post from "@/components/post";
 import Header from "@/components/header";
-import WelcomeMessage from "@/components/welcomeMessage";
 import PostsContainer from "@/components/postContainer";
 
-export async function getCookie() {
-	try {
-		const cookie = await cookies();
-
-		const raw = cookie.get("user")?.value;
-
-		const profileObj = raw ? JSON.parse(raw) : null;
-
-		return profileObj;
-	} catch (err) {
-		console.log(err);
-	}
-}
-
-export default async function Dashboard() {
+export default async function Profile({}) {
 	let profileObj = await getCookie();
 
 	if (!profileObj) redirect("/");
@@ -28,7 +12,7 @@ export default async function Dashboard() {
 	return (
 		<div>
 			<Header profileObj={profileObj} />
-			<p className="welcome">My Posts</p>;
+			<p className="welcome">My Posts</p>
 			<PostsContainer profileObj={profileObj}>
 				{profileObj.posts.map((post, idx) => (
 					<Post {...post} key={idx + Math.random()} />

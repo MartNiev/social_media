@@ -18,7 +18,9 @@ export default function LoginScreen() {
 
 		if (!profile) return setPasswordIncorrect(true);
 
-		router.push("/user/feed");
+		console.log(loginInfo.current.username);
+
+		router.push(`/user/${loginInfo.current.username}/feed`);
 	}
 
 	return (

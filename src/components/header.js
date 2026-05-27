@@ -40,7 +40,7 @@ export default function Header({ profileObj }) {
 					<button
 						className="bt"
 						onClick={() => {
-							router.push("/user/feed");
+							router.push(`/user/${profileObj.username}/feed`);
 						}}
 					>
 						Feed
@@ -48,7 +48,7 @@ export default function Header({ profileObj }) {
 					<button
 						className="bt"
 						onClick={() => {
-							router.push("/user/profile");
+							router.push(`/user/${profileObj.username}/profile`);
 						}}
 					>
 						Profile
@@ -59,7 +59,7 @@ export default function Header({ profileObj }) {
 					<button
 						className="bt"
 						onClick={() => {
-							router.push("/user/search");
+							router.push(`/user/${profileObj.username}/search`);
 						}}
 					>
 						Search

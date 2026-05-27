@@ -49,3 +49,57 @@ function convertAspectRatio(height, width) {
 }
 
 // console.log(convertAspectRatio(2040, 1114));
+
+let arrObj = [
+	{ hash: 964, username: "manv" },
+	{ hash: 755, username: "nanv" },
+	{ hash: 417, username: "wen92" },
+	{ hash: 866, username: "man" },
+	{ hash: 576, username: "ama25" },
+	{ hash: 711, username: "ert" },
+	{ hash: 365, username: "dfg" },
+	{ hash: 810, username: "ama1992" },
+	{ hash: 731, username: "man1992" },
+	{ hash: 532, username: "ama1" },
+];
+
+arrObj.sort((obj1, obj2) => obj1.hash - obj2.hash);
+
+let count = 1;
+
+function getHash(string) {
+	let hash = 0;
+
+	for (let i = 0; i < string.length; i++) {
+		let asc = string.charCodeAt(i);
+
+		hash = (hash << 5) - hash + asc;
+
+		hash = hash | 0;
+	}
+
+	return Math.abs(hash) % 1000;
+}
+function searchAlgorithm(hash, sortedArray, startIdx, endingIdx) {
+	let divArray = sortedArray.slice(startIdx, endingIdx);
+	if (divArray.length === 1) return;
+
+	let divIdx = Math.floor(divArray.length / 2);
+
+	if (hash === divArray[divIdx].hash) {
+		console.log("Found username: ", divArray[divIdx].username);
+		return;
+	}
+
+	if (hash <= divArray[divIdx].hash) {
+		searchAlgorithm(hash, divArray, 0, divIdx);
+	}
+	if (hash > divArray[divIdx].hash) {
+		// console.log(sortedArray.length - 1);
+		searchAlgorithm(hash, divArray, divIdx, sortedArray.length);
+	}
+}
+
+let searchWord = "ama1";
+let hash = getHash(searchWord);
+searchAlgorithm(hash, arrObj, 0, arrObj.length);

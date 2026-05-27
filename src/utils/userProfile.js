@@ -1,11 +1,15 @@
-class Profile {
-  profile;
+import { cookies } from "next/headers";
 
-  constructor(profileObj) {
-    this.profile = profileObj;
-  }
+export async function getCookie() {
+	try {
+		const cookie = await cookies();
 
-  getProfile() {
-    return this.profile;
-  }
+		const raw = cookie.get("user")?.value;
+
+		const profileObj = raw ? JSON.parse(raw) : null;
+
+		return profileObj;
+	} catch (err) {
+		console.log(err);
+	}
 }

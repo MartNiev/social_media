@@ -1,6 +1,6 @@
 import Header from "@/components/header";
 import WelcomeMessage from "@/components/welcomeMessage";
-import { getCookie } from "@/app/user/profile/page";
+import { getCookie } from "@/utils/userProfile";
 import { redirect } from "next/navigation";
 
 export default async function Feed() {
@@ -9,7 +9,7 @@ export default async function Feed() {
 
 	return (
 		<div>
-			<Header />
+			<Header profileObj={profileObj} />
 			<WelcomeMessage />
 		</div>
 	);

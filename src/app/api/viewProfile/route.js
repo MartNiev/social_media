@@ -14,8 +14,9 @@ export async function POST(req) {
 		const userList = JSON.parse(readingUserList);
 		const userObject = userList[username];
 
-		return NextResponse.json(userObject);
+		return NextResponse.json({ firstname: userObject.firstname, posts: userObject.posts });
 	} catch (error) {
+		console.log(error);
 		return NextResponse.json({ success: false });
 	}
 }
